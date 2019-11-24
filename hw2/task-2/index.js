@@ -2,7 +2,6 @@ let fs = require("fs");
 let formatDistance = require("date-fns/formatDistance");
 let format = require("date-fns/format")
 let viLocale = require("date-fns/locale/vi");
-let XLSX = require('xlsx');
 let obj = [];
 
 // format number

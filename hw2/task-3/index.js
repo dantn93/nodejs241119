@@ -20,8 +20,7 @@ fs.readFile("./../products.json", function(err, data) {
       delete value.dateUpdated
       
     });
-    
-    //Task 3
+
     // Use xlsx library to convert products.json to a Microsoft Excel file buffer
     // Write the buffer to hard drive as products.xlsx and should be able to open in Excel.
 
