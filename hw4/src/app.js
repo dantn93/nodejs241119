@@ -48,16 +48,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.start = (PORT, MONGO_URL) => {
-	mongoose
-		.connect(MONGO_URL)
-		.then(() => {
-			debug('Database connect success');
-			app.listen(PORT, () => console.log('App started and listening on port', PORT));
-		})
-		.catch(err => {
-			debug('Database connection error:' + err);
-		});
-};
-
 module.exports = app;
