@@ -3,7 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
 
+var loginRouter = require('./modules/login/login.router');
 var adminRouter = require('./modules/admin/admin.router');
 var productRouter = require('./modules/products/product.router');
 var productDetailRouter = require('./modules/productDetails/product.detail.router');
@@ -22,8 +24,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(session({ secret: 'nordict-shop', cookie: { maxAge: 60 * 60 * 1000 } }));
 
 app.use('/', [
+  loginRouter,
   adminRouter,
   productRouter,
   productDetailRouter,

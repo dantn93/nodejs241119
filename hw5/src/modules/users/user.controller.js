@@ -3,37 +3,41 @@ const User = require('../../models/User');
 
 const users = async (req, res) => {
   let users = await User.find({}).exec();
-  res.render('users', {users: users});
 };
 
 const GetAllUsers = async (req, res) => {
   try {
     let users = await User.find({}).exec();
-    res.json({success: true, data: users});  
+    res.json({success: true, data: users});
   } catch (error) {
-    res.json({success: false, error: error});
+    res.json({success: false, error: error.message});
   }
 };
 
 const CreateUsers = async (req, res) => {
   try {
-    let user = _.get(req, 'body', []);
+    let user = _.get(req, 'body', null);
+    if (user === null) {
+      res.json({success: false, error: 'Body is null'});
+      return
+    }
     user._id = '' + (new Date).getTime();
     user.dob = new Date(user.dob);
     await User.create(user);
     res.json({success: true});
   } catch (error) {
-    res.json({success: false, error: error});
+    console.log(error.message)
+    res.json({success: false, error: error.message});
   }
 }
 
 const GetUser = async (req, res) => {
   try {
-    const id = _.get(req, 'params.id', null);
+    const id = await _.get(req, 'params.id', null);
     const user = await User.findOne({_id: id}).exec();
     res.json({success: true, data: user});
   } catch (error) {
-    res.json({success: false, error: error});
+    res.json({success: false, error: error.message});
   }
 
 }
@@ -42,10 +46,10 @@ const UpdateUser = async (req, res) => {
   try {
     const id = _.get(req, 'params.id', null);
     const data = _.get(req, 'body', {});
-    const a = await User.updateOne({_id: id}, data);
+    await User.updateOne({_id: id}, data);
     res.json({success: true});
   } catch (error) {
-    res.json({success: false, error: error});
+    res.json({success: false, error: error.message});
   }
 }
 
@@ -82,17 +86,17 @@ const ReplaceUser = async (req, res) => {
     await User.updateOne({_id: id}, body).exec();
     res.json({success: true});
   } catch (error) {
-    res.json({success: false, error: error});
+    res.json({success: false, error: error.message});
   }
 }
 
 const DeleteUser = async (req, res) => {
   try {
-    const id = _.get(req, 'params.id', null);
+    const id = await _.get(req, 'params.id', null);
     await User.deleteOne({_id: id}).exec();
-    res.json({success: true});
+    await res.json({success: true});
   } catch (error) {
-    res.json({success: false, error: error});
+    await res.json({success: false, error: error.message});
   }
 }
 

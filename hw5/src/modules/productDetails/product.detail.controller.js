@@ -17,7 +17,7 @@ const FilterProducts = async (req, res) => {
     const products = await Product.find(where).skip(offset).limit(limit).exec();
     res.json({success: true, data: products});
   } catch (error) {
-    res.json({success: false, error: error});
+    res.json({success: false, error: error.message});
   }
 }
 

@@ -26,7 +26,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-const MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://admin:pYMuwWdrWULs8EUX@cluster0-nmhgi.mongodb.net/nordic';
+const MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://admin:Dan83561410@cluster0-nmhgi.mongodb.net/nordic';
 
 // app.start(port, MONGO_URL);
 

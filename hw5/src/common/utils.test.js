@@ -1,4 +1,4 @@
-const utils = require('../src/common/utils');
+const utils = require('./utils');
 
 describe('Test email validator', () => {
   it('Validate email: false', () => {
